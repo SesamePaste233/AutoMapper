@@ -1,5 +1,21 @@
 #include "Photogrammetry.h"
 
+Eigen::Matrix3d photo::rotationMatrix(double r1, double r2, double r3)
+{
+    Eigen::Matrix3d Rphy;
+    Eigen::Matrix3d Romega;
+    Eigen::Matrix3d Rkapa;
+    Rphy << cos(r1), 0, -sin(r1),
+        0, 1, 0,
+        sin(r1), 0, cos(r1);
+    Romega << 1, 0, 0,
+        0, cos(r2), -sin(r2),
+        0, sin(r2), cos(r2);
+    Rkapa << cos(r3), -sin(r3), 0,
+        sin(r3), cos(r3), 0,
+        0, 0, 1;
+    return Rphy * Romega * Rkapa;
+}
 
 void photo::collinearEquation(Eigen::VectorXd& intrinsic_elements, Eigen::VectorXd& extrinsicElems, Eigen::VectorXd& obj_pt, Eigen::VectorXd& img_pt)
 {
@@ -145,7 +161,7 @@ Eigen::VectorXd photo::calcTransformation(std::vector<Pair<2, 2>>& pairs, Eigen:
     opt::LeastSquareSolver solver(A, L, X);
 
     auto obj_fcn = [&](void*)->bool {
-        auto R_L = rotationMatrix(type, X(0), X(1), X(2));
+        auto R_L = rotationMatrix(X(0), X(1), X(2));
         double By = Bx * tan(X(3));
         double Bz = sqrt(Bx * Bx + By * By) * tan(X(4));
         for (int j = 0;j < pairs.size();j++) {
@@ -245,7 +261,7 @@ Eigen::VectorXd photo::calcTransformation(std::vector<Pair<3, 3>>& pairs, double
 
         rotation = rotationMatrix(X(1), X(2), X(3));
         scale = X(0);
-        translation = x2_mass - X(0) * rotationMatrix(PhyOmegaKappa, X(1), X(2), X(3)) * x1_mass;
+        translation = x2_mass - X(0) * rotationMatrix(X(1), X(2), X(3)) * x1_mass;
     }
     else {
         Eigen::VectorXd X(7);//lambda, phi, omega, kappa,x,y,z
@@ -308,7 +324,7 @@ Eigen::VectorXd photo::calcTransformation(std::vector<Pair<3, 3>>& pairs, double
 
         rotation = rotationMatrix(X(1), X(2), X(3));
         scale = X(0);
-        translation = X.tail(3) + x2_mass - X(0) * rotationMatrix(PhyOmegaKappa, X(1), X(2), X(3)) * x1_mass;
+        translation = X.tail(3) + x2_mass - X(0) * rotationMatrix(X(1), X(2), X(3)) * x1_mass;
     }
     Eigen::Vector3d error;
     error.fill(0);

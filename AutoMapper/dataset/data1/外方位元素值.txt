@@ -1,0 +1,36 @@
+begin  photo_parameters   0000
+COL_ROW_Photo:   11129   11263
+FILE_NAME:   D:\基础摄影测量课间-实习\数据\数据1-航空框幅影像\0321.tif
+EO_parameters:  1		445820.597000   4504892.196000  402.823000 -0.107500  0.352500  0.633889
+end
+
+begin  photo_parameters   0001
+COL_ROW_Photo:   11129   11263
+FILE_NAME:   D:\基础摄影测量课间-实习\数据\数据1-航空框幅影像\0320.tif
+EO_parameters:  1			446030.822000  4504892.481000 399.247000 -0.244722  0.329444 -0.364444
+end
+
+begin  photo_parameters   0002
+COL_ROW_Photo:   11129   11263
+FILE_NAME:   D:\基础摄影测量课间-实习\数据\数据1-航空框幅影像\0319.tif
+EO_parameters:  1		446257.103000  4504892.419000 395.250000 -0.203889 0.115278  -0.329167
+end
+
+begin  photo_parameters   0003
+COL_ROW_Photo:   11129   11263
+FILE_NAME:   D:\基础摄影测量课间-实习\数据\数据1-航空框幅影像\0332.tif
+EO_parameters:  1			445813.820000  4504487.219000 396.940000 -0.976944 -1.176667 3.557500
+end
+
+begin  photo_parameters   0004
+COL_ROW_Photo:   11129   11263
+FILE_NAME:   D:\基础摄影测量课间-实习\数据\数据1-航空框幅影像\0333.tif
+EO_parameters:  1			446034.446000  4504489.705000 389.477000 -1.218333 -0.605556 2.256667
+end
+
+begin  photo_parameters   0005
+COL_ROW_Photo:   11129   11263
+FILE_NAME:   D:\基础摄影测量课间-实习\数据\数据1-航空框幅影像\0334.tif
+EO_parameters:  1			446269.256000 4504488.804000 388.162000 -0.724722 0.027500 1.573333
+end
+

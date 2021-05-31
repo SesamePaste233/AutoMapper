@@ -116,13 +116,14 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\OpenCV_contrib\include;$(ProjectDir)..\eigen3;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\OpenCV_contrib\include;$(ProjectDir)..\eigen3;$(ProjectDir)..\libopt-v1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(ProjectDir)..\OpenCV_contrib\x64\vc16\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>opencv_world3410d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)..\OpenCV_contrib\x64\vc16\lib;$(ProjectDir)..\libopt-v1\x64\vc16\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opencv_world3410d.lib;liboptimizerd.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -149,7 +150,6 @@
     <ClInclude Include="AlgorithmBase.h" />
     <ClInclude Include="BaseType.h" />
     <ClInclude Include="CommonHeader.h" />
-    <ClInclude Include="Optimizer.h" />
     <ClInclude Include="Photogrammetry.h" />
     <ClInclude Include="Pipeline.h" />
     <ClInclude Include="PointCloudType.h" />
@@ -157,7 +157,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Optimizer.cpp" />
     <ClCompile Include="Photogrammetry.cpp" />
     <ClCompile Include="Pipeline.cpp" />
   </ItemGroup>

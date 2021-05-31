@@ -149,13 +149,13 @@ void photo::Pipeline::calcTransformationByPhotos(std::string photo_name, bool ve
         }
     }
 
-    auto error = photo::calcTransformation(pairs, elements, PhyOmegaKappa, camera1, camera2);
+    auto error = photo::calcTransformation(pairs, elements, camera1, camera2);
 
     Eigen::Vector3d translation;
     Eigen::Matrix3d rotation;
     translation << 1, tan(elements(3)), (1 + tan(elements(3))) * tan(elements(4));
     translation.normalize();
-    rotation = photo::rotationMatrix(PhyOmegaKappa, elements(0), elements(1), elements(2));
+    rotation = photo::rotationMatrix(elements(0), elements(1), elements(2));
     photos[photo_name].next->applyTransformation(translation, rotation, 1);
 
     if (verbose) {
@@ -409,9 +409,9 @@ bool photo::Pipeline::Photo::calcExtrinsicElems(bool verbose)
         return false;
     }
     //begin calculation
-    auto extrinsicElems = photo::calcExtrinsicElems(pairs, PhyOmegaKappa, camera, master->zone.m());
+    auto extrinsicElems = photo::calcExtrinsicElems(pairs, camera, master->zone.m());
     this->extrinsicLinearElems = extrinsicElems.head(3);
-    this->rotationMatrix = photo::rotationMatrix(PhyOmegaKappa, extrinsicElems(3), extrinsicElems(4), extrinsicElems(5));
+    this->rotationMatrix = photo::rotationMatrix(extrinsicElems(3), extrinsicElems(4), extrinsicElems(5));
     this->has_extrinsic_elems = true;
 
     if (verbose) {
@@ -451,7 +451,7 @@ bool photo::Pipeline::Photo::interiorOrientate(bool verbose)
 
 void photo::Pipeline::Photo::applyTransformation(Eigen::VectorXd trans_vec, double scale)
 {
-    this->rotationMatrix = photo::rotationMatrix(PhyOmegaKappa, trans_vec(3), trans_vec(4), trans_vec(5))*this->rotationMatrix;
+    this->rotationMatrix = photo::rotationMatrix(trans_vec(3), trans_vec(4), trans_vec(5))*this->rotationMatrix;
     this->extrinsicLinearElems += trans_vec.head(3);
     if (next == nullptr) {
         return;

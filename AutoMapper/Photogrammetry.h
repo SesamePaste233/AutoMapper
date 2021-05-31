@@ -1,5 +1,5 @@
 #pragma once
-#include "Optimizer.h"
+#include "CommonHeader.h"
 
 namespace photo {
 
@@ -102,6 +102,8 @@ namespace photo {
 			img_pt = i, obj_pt = j;
 		}
 	};
+
+	Eigen::Matrix3d rotationMatrix(double r1, double r2, double r3);
 
 	/*
 	@brief This function calculates parameters of collinear equation based on the input.
